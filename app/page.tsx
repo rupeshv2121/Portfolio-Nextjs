@@ -38,7 +38,16 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "projects", "skills", "contact"];
+      const sections = [
+        "hero",
+        "about",
+        "education",
+        "experience",
+        "projects",
+        "skills",
+        "certifications",
+        "contact",
+      ];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -106,7 +115,15 @@ export default function Portfolio() {
               🚩 Jai Siya Ram 🚩
             </div>
             <div className="hidden md:flex space-x-8">
-              {["About", "Projects", "Skills", "Contact"].map((item) => (
+              {[
+                "About",
+                "Education",
+                "Experience",
+                "Projects",
+                "Skills",
+                "Certifications",
+                "Contact",
+              ].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -188,15 +205,13 @@ export default function Portfolio() {
                   Hello, I'm Rupesh Varshney
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  I'm a full-stack developer with 1.5+ years of experience
-                  creating web applications that combine beautiful design with
-                  robust functionality. I specialize in React, Next.js, and
-                  modern web technologies.
+                  Software Engineering student skilled in MERN, TypeScript, and cloud tools. Currently building an Invoice Generator web app with automated PDF billing. Passionate about scalable systems, problem-solving, and AI integration.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  I specialize in full-stack development with React, Next.js, Node.js, and modern web technologies. I have hands-on experience with cloud platforms, databases, and building production-ready applications.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  When I'm not coding, you can find me exploring new design
-                  trends, contributing to open-source projects, or experimenting
-                  with the latest web technologies.
+                  When I'm not coding, you can find me solving DSA problems on LeetCode, contributing to open-source projects, or exploring new technologies and design trends.
                 </p>
               </div>
 
@@ -283,11 +298,198 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* Education Section */}
+      <section id="education" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
+              Education
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Academic background and qualifications
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto ">
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-orange-500/50 py-5">
+              <CardHeader>
+                <CardTitle className="text-2xl group-hover:text-orange-500 transition-colors duration-300">
+                  Bachelor of Technology (B.Tech)
+                </CardTitle>
+                <CardDescription className="text-lg">
+                  Computer Science & Engineering
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                  <p className="text-muted-foreground font-medium">
+                    Zakir Husain College of Engineering and Technology, AMU
+                  </p>
+                  <Badge
+                    variant="secondary"
+                    className="bg-orange-500/10 text-orange-500 w-fit"
+                  >
+                    CGPA: 9.298
+                  </Badge>
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <p>Affiliated to Aligarh Muslim University</p>
+                  <p className="mt-1">August 2023 - August 2027</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
       <section
-        id="projects"
+        id="experience"
         className="py-20 px-6 bg-gradient-to-br from-orange-500/5 via-yellow-500/5 to-blue-500/5"
       >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
+              Professional Experience
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              My journey in software development
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-orange-500/50">
+              <CardHeader>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                  <div>
+                    <CardTitle className="text-2xl group-hover:text-orange-500 transition-colors duration-300">
+                      Software Developer Intern
+                    </CardTitle>
+                    <CardDescription className="text-lg mt-2">
+                      CoolCliq • Aligarh, India
+                    </CardDescription>
+                  </div>
+                  <Badge
+                    variant="secondary"
+                    className="bg-blue-500/10 text-blue-500 w-fit"
+                  >
+                    August 2025 - October 2025
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-orange-500 mt-1">•</span>
+                    <span>
+                      Developed 25+ enhanced modules for B2B travel bookings, including flights, hotels, packages, and visa processing, reducing processing time by 25%
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-orange-500 mt-1">•</span>
+                    <span>
+                      Collaborated as contributor to the TechTrailDMC project, actively participating in feature development and bug fixes
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-orange-500 mt-1">•</span>
+                    <span>
+                      Built 25+ UI components for efficient booking, supplier onboarding, and real-time management
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-orange-500 mt-1">•</span>
+                    <span>
+                      Integrated dashboards and supplier management features, enabling global reach, margin control, verified partner coordination, and real-time tracking
+                    </span>
+                  </li>
+                </ul>
+                <div className="flex flex-wrap gap-2 pt-4">
+                  {[
+                    "React.js",
+                    "Next.js",
+                    "Node.js",
+                    "MongoDB",
+                    "TypeScript",
+                    "Tailwind CSS",
+                  ].map((tech) => (
+                    <Badge
+                      key={tech}
+                      variant="outline"
+                      className="border-orange-500/30"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-blue-500/50">
+              <CardHeader>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                  <div>
+                    <CardTitle className="text-2xl group-hover:text-blue-500 transition-colors duration-300">
+                      Software Developer Intern
+                    </CardTitle>
+                    <CardDescription className="text-lg mt-2">
+                      Temflo Pvt. Ltd. • Aligarh, India
+                    </CardDescription>
+                  </div>
+                  <Badge
+                    variant="secondary"
+                    className="bg-orange-500/10 text-orange-500 w-fit"
+                  >
+                    July 2025 - August 2025
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-500 mt-1">•</span>
+                    <span>
+                      Improved UI responsiveness, reducing page load time by 20%
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-500 mt-1">•</span>
+                    <span>
+                      Designed and implemented responsive UI adaptable to desktop and mobile devices, improving user retention by 15%
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-500 mt-1">•</span>
+                    <span>
+                      Implemented multi-language UI, quick actions, and integration with backend APIs for efficient management
+                    </span>
+                  </li>
+                </ul>
+                <div className="flex flex-wrap gap-2 pt-4">
+                  {[
+                    "React.js",
+                    "TypeScript",
+                    "REST APIs",
+                    "UI/UX Design",
+                    "Responsive Design",
+                  ].map((tech) => (
+                    <Badge
+                      key={tech}
+                      variant="outline"
+                      className="border-blue-500/30"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
@@ -299,22 +501,48 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "E-Commerce Platform",
+                title: "Invoice Generator Web-App",
                 description:
-                  "Modern e-commerce solution with React.js and Razorpay integration",
+                  "Built an SaaS platform integrating Supabase for seamless data retrieval and middleware access control across 4 pricing tiers, eliminating unauthorized access. Developed GST-compliant invoices with automated tax calculations and PDF generation, reducing errors by 95% and creation time by 60%. Created analytics dashboard with real-time metrics and JWT authentication, optimized for <200ms response time serving 1000+ users.",
                 image:
-                  "https://plus.unsplash.com/premium_photo-1739315914931-0589ca36e8fb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGUlMjBjb21tZXJjZSUyMHRodW1ibmFpbCUyMHdlYnNpdGV8ZW58MHx8MHx8fDA%3D",
-                tags: ["React", "Next.js", "Stripe", "Tailwind"],
-                link: "#",
+                  "https://plus.unsplash.com/premium_photo-1720032304972-1f1142e73253?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                tags: [
+                  "React.js",
+                  "Node.js",
+                  "Express",
+                  "Supabase",
+                  "JWT",
+                  "PDF Generation",
+                ],
+                link: "https://invoice-generator-theta-olive.vercel.app/",
+                github: "https://github.com/rupeshv2121/invoice_generator",
               },
               {
                 title: "Portfolio Website",
                 description:
-                  "Responsive portfolio with modern animations and interactive elements",
+                  "Developed a personal portfolio website showcasing projects, technical skills, and achievements. Integrated dynamic SEO and server-side rendering (SSR), improving page load speed by 30% and boosting SEO ranking. Implemented responsive and modern UI/UX designs, ensuring seamless experience across different devices (like desktop, tablet, mobile).",
                 image:
                   "https://assets.awwwards.com/awards/element/2022/05/627be98fa9616400863515.png",
-                tags: ["Next.js", "Framer Motion", "Tailwind", "TypeScript"],
-                link: "#",
+                tags: [
+                  "Next.js",
+                  "TypeScript",
+                  "Firebase",
+                  "Tailwind CSS",
+                  "SSR",
+                  "SEO",
+                ],
+                link: "https://portfolio-nextjs-blush.vercel.app/",
+                github: "https://github.com/rupeshv2121/Portfolio-Nextjs",
+              },
+              {
+                title: "Data Analysis Project",
+                description:
+                  "Diverse data visualization techniques with charts, plots, and dashboards. Created 5+ charts, plots, and dashboards, improving decision-making efficiency by 30%. Comprehensive analysis using Python data science libraries including Pandas, NumPy, Matplotlib, and Seaborn for insights extraction.",
+                image:
+                  "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RGF0YSUyMEFuYWx5c2lzfGVufDB8fDB8fHww",
+                tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
+                link: "https://github.com/rupeshv2121/Data_Visualization",
+                github: "https://github.com/rupeshv2121/Data_Visualization",
               },
             ].map((project, index) => (
               <Card
@@ -327,17 +555,26 @@ export default function Portfolio() {
                     alt={project.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/60 via-yellow-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-end p-4">
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      className="cursor-pointer opacity-90 bg-white/90 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300"
-                    >
-                      <Link href="https://github.com/rupeshv2121/E-Commerce_">
-                        <span className="h-4 w-4 mr-2" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/60 via-yellow-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-between p-4">
+                    <Link href={project.link} target="_blank">
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        className="cursor-pointer opacity-90 bg-white/90 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300"
+                      >
                         View Project
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
+
+                     <Link href={project.github} target="_blank">
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        className="cursor-pointer opacity-90 bg-white/90 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300"
+                      >
+                        Source Code
+                      </Button>
+                    </Link>
                   </div>
                 </div>
                 <CardHeader>
@@ -379,39 +616,81 @@ export default function Portfolio() {
             {[
               {
                 icon: <Code className="h-8 w-8" />,
-                title: "Frontend Development",
+                title: "Programming Languages",
                 skills: [
-                  "React",
-                  "Next.js",
+                  "JavaScript (ES6+)",
                   "TypeScript",
-                  "Tailwind CSS",
-                  "Framer Motion",
+                  "Java",
+                  "Python",
+                  "C++",
+                  "C",
                 ],
                 color: "orange",
               },
               {
-                icon: <Palette className="h-8 w-8" />,
-                title: "UI/UX Design",
-                skills: ["Figma", "Responsive Design", "Prototyping"],
-                color: "yellow",
-              },
-              {
                 icon: <Brain className="h-8 w-8" />,
-                title: "Backend",
+                title: "Frameworks & Libraries",
                 skills: [
+                  "React.js",
+                  "Next.js",
                   "Node.js",
-                  "PostgreSQL",
                   "Express.js",
-                  "MongoDB",
-                  "Firebase",
+                  "Redux",
+                  "Tailwind CSS",
                 ],
                 color: "blue",
               },
               {
                 icon: <BrainCircuitIcon className="h-8 w-8" />,
-                title: "Programming Languages",
-                skills: ["Java", "C++", "Python"],
+                title: "Database & Cloud",
+                skills: [
+                  "MongoDB",
+                  "PostgreSQL",
+                  "SQL",
+                  "Firebase",
+                  "Supabase",
+                  "WebSockets",
+                ],
                 color: "green",
+              },
+              {
+                icon: <Palette className="h-8 w-8" />,
+                title: "Developer Tools",
+                skills: [
+                  "Git",
+                  "Docker",
+                  "Postman",
+                  "Linux",
+                  "Vercel",
+                  "CI/CD Pipelines",
+                ],
+                color: "yellow",
+              },
+              {
+                icon: <Brain className="h-8 w-8" />,
+                title: "Data Science",
+                skills: [
+                  "Pandas",
+                  "NumPy",
+                  "Matplotlib",
+                  "Seaborn",
+                  "Data Visualization",
+                  "Data Analysis",
+                ],
+                color: "purple",
+              },
+              {
+                icon: <Code className="h-8 w-8" />,
+                title: "Core Concepts",
+                skills: [
+                  "REST APIs",
+                  "OOP",
+                  "DSA",
+                  "System Design",
+                  "DevOps",
+                  "Problem Solving",
+                ],
+                color: "pink",
               },
             ].map((category, index) => (
               <Card
@@ -425,6 +704,10 @@ export default function Portfolio() {
                       ? "rgb(234, 179, 8, 0.5)"
                       : category.color === "green"
                       ? "rgb(34, 197, 94, 0.5)"
+                      : category.color === "purple"
+                      ? "rgb(168, 85, 247, 0.5)"
+                      : category.color === "pink"
+                      ? "rgb(236, 72, 153, 0.5)"
                       : "rgb(249, 115, 22, 0.5)",
                 }}
               >
@@ -437,6 +720,10 @@ export default function Portfolio() {
                         ? "bg-yellow-500/10 text-yellow-500 group-hover:bg-yellow-500"
                         : category.color === "green"
                         ? "bg-green-500/10 text-green-500 group-hover:bg-green-500"
+                        : category.color === "purple"
+                        ? "bg-purple-500/10 text-purple-500 group-hover:bg-purple-500"
+                        : category.color === "pink"
+                        ? "bg-pink-500/10 text-pink-500 group-hover:bg-pink-500"
                         : "bg-orange-500/10 text-orange-500 group-hover:bg-orange-500"
                     } group-hover:text-white`}
                   >
@@ -450,6 +737,10 @@ export default function Portfolio() {
                         ? "group-hover:text-yellow-500"
                         : category.color === "green"
                         ? "group-hover:text-green-500"
+                        : category.color === "purple"
+                        ? "group-hover:text-purple-500"
+                        : category.color === "pink"
+                        ? "group-hover:text-pink-500"
                         : "group-hover:text-orange-500"
                     }
                   >
@@ -475,7 +766,11 @@ export default function Portfolio() {
                                   : category.color === "yellow"
                                   ? "#eab308"
                                   : category.color === "green"
-                                  ? "#34d399"
+                                  ? "#22c55e"
+                                  : category.color === "purple"
+                                  ? "#a855f7"
+                                  : category.color === "pink"
+                                  ? "#ec4899"
                                   : "#f97316"
                               }, ${
                                 category.color === "blue"
@@ -483,7 +778,11 @@ export default function Portfolio() {
                                   : category.color === "yellow"
                                   ? "#facc15"
                                   : category.color === "green"
-                                  ? "#34d399"
+                                  ? "#4ade80"
+                                  : category.color === "purple"
+                                  ? "#c084fc"
+                                  : category.color === "pink"
+                                  ? "#f472b6"
                                   : "#fb923c"
                               })`,
                             }}
@@ -499,17 +798,146 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Certifications & Achievements Section */}
       <section
-        id="contact"
+        id="certifications"
         className="py-20 px-6 bg-gradient-to-br from-orange-500/5 via-yellow-500/5 to-blue-500/5"
       >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
+              Certifications & Achievements
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Professional certifications and coding achievements
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Certifications */}
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold mb-6 text-orange-500">
+                Certifications
+              </h3>
+
+              <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-blue-500/50 py-2">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-blue-500 transition-colors duration-300">
+                    Full Stack Web Development
+                  </CardTitle>
+                  <CardDescription>Apna College</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Badge
+                    variant="secondary"
+                    className="bg-blue-500/10 text-blue-500"
+                  >
+                    Completed
+                  </Badge>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Achievements */}
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold mb-6 text-orange-500">
+                Achievements & Leadership
+              </h3>
+
+              <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-yellow-500/50 py-2">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-yellow-500 transition-colors duration-300">
+                    <div className="flex justify-between gap-2">
+                      <p>Google Student Ambassador</p>
+                      <Badge
+                        variant="secondary"
+                        className="bg-yellow-500/10 text-yellow-500"
+                      >
+                        August 2025 - Present
+                      </Badge>
+                    </div>
+                  </CardTitle>
+                  <CardDescription>Google Gemini AI</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <p className="text-sm text-muted-foreground">
+                      Selected as a Google Student Ambassador to represent Google Gemini AI on campus
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-blue-500/50 py-2">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-blue-500 transition-colors duration-300">
+                    <div className="flex justify-between gap-2">
+                      <p>IGNITE Hackathon Finalist</p>
+                      <Badge
+                        variant="secondary"
+                        className="bg-blue-500/10 text-blue-500"
+                      >
+                        2025
+                      </Badge>
+                    </div>
+                  </CardTitle>
+                  <CardDescription>StartLab Capital</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <p className="text-sm text-muted-foreground">
+                      Finalist at IGNITE Hackathon organized by StartLab Capital (Ongoing)
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-orange-500/50 py-2">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-orange-500 transition-colors duration-300">
+                    <div className="flex justify-between gap-2">
+                      <p>LeetCode & GeeksForGeeks</p>
+                      <Badge
+                        variant="secondary"
+                        className="bg-orange-500/10 text-orange-500"
+                      >
+                        Active
+                      </Badge>
+                    </div>
+                  </CardTitle>
+                  <CardDescription>Competitive Programming</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <p className="text-sm text-muted-foreground">
+                      Solved 170+ DSA problems on LeetCode and GeeksForGeeks
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Let's Work Together</h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mb-4">
               Ready to bring your ideas to life? Let's start a conversation.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-muted-foreground">
+              <a href="mailto:rupeshvarshney7@gmail.com" className="flex items-center gap-2 hover:text-orange-500 transition-colors">
+                <Mail className="h-4 w-4" />
+                rupeshvarshney7@gmail.com
+              </a>
+              <span className="hidden sm:inline">•</span>
+              <a href="tel:+919456467877" className="flex items-center gap-2 hover:text-orange-500 transition-colors">
+                📱 +91 9456467877
+              </a>
+            </div>
           </div>
 
           <Card className="shadow-2xl border-2 hover:border-orange-500/50 transition-all duration-500">
@@ -596,27 +1024,33 @@ export default function Portfolio() {
             <p> Crafted with passion and modern web technologies.</p>
           </div>
           <div className="flex justify-center space-x-6">
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-1 border-white hover:bg-transparent hover:text-orange-500 transition-colors duration-300"
-            >
-              <Github className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-1 border-white hover:border-blue-500 hover:text-blue-500  transition-colors duration-300"
-            >
-              <Linkedin className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className=" border-1 border-white hover:text-yellow-500 transition-colors duration-300"
-            >
-              <Mail className="h-4 w-4" />
-            </Button>
+            <Link href="https://github.com/rupeshv2121" target="_blank">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-1 border-white hover:bg-transparent hover:text-orange-500 transition-colors duration-300"
+              >
+                <Github className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="https://www.linkedin.com/in/rupeshvarshney/" target="_blank">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-1 border-white hover:border-blue-500 hover:text-blue-500  transition-colors duration-300"
+              >
+                <Linkedin className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="mailto:rupeshvarshney7@gmail.com">
+              <Button
+                variant="outline"
+                size="sm"
+                className=" border-1 border-white hover:text-yellow-500 transition-colors duration-300"
+              >
+                <Mail className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </footer>
