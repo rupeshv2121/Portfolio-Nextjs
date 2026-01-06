@@ -101,20 +101,26 @@ export default function Portfolio() {
         timestamp: serverTimestamp(),
       });
 
-      // Send email notification
-      const emailResponse = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      // Try to send email notification (non-blocking)
+      try {
+        const emailResponse = await fetch("/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
 
-      if (!emailResponse.ok) {
-        throw new Error("Failed to send email");
+        if (emailResponse.ok) {
+          toast.success("Message sent successfully! Check your email for confirmation.");
+        } else {
+          toast.success("Message received! I'll get back to you soon.");
+        }
+      } catch (emailError) {
+        console.warn("Email notification failed:", emailError);
+        toast.success("Message received! I'll get back to you soon.");
       }
 
-      toast.success("Message sent successfully! Check your email for confirmation.");
       (e.target as HTMLFormElement).reset();
     } catch (error) {
       console.error("Error sending message:", error);
