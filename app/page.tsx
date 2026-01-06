@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { db } from "@/lib/firebase"; // Make sure this path matches your Firebase config file
+import { db } from "@/lib/firebase";
 import image from "@/public/GP4845.jpg";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import {
@@ -35,6 +35,7 @@ export default function Portfolio() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [isLoading, setIsLoading] = useState(true);
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,6 +84,8 @@ export default function Portfolio() {
 
   const handleSendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSending(true);
+    
     const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get("name") as string,
@@ -92,15 +95,32 @@ export default function Portfolio() {
     };
 
     try {
+      // Save to Firebase
       await addDoc(collection(db, "contacts"), {
         ...data,
         timestamp: serverTimestamp(),
       });
-      toast.success("Message sent successfully!");
+
+      // Send email notification
+      const emailResponse = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!emailResponse.ok) {
+        throw new Error("Failed to send email");
+      }
+
+      toast.success("Message sent successfully! Check your email for confirmation.");
       (e.target as HTMLFormElement).reset();
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -171,7 +191,7 @@ export default function Portfolio() {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => scrollToSection("contact")}
+                onClick={() =>  window.location.href = "mailto:rupeshvarshney7@gmail.com?subject=Hiring%20Opportunity&body=Hi%20Rupesh%2C%0A%0AI%20am%20interested%20in%20hiring%20you%20for%20a%20project."}
                 className="group border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 transform hover:scale-105"
               >
                 Get In Touch
@@ -186,10 +206,10 @@ export default function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-6">
+      <section id="about" className="py-20 px-6 mt-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-bold mb-2 bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
               About Me
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -218,7 +238,7 @@ export default function Portfolio() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   download
-                  href="https://drive.google.com/open?id=1nkjUXdDwKUQoMAynondRATVzHsWE0ukP&usp=drive_fs"
+                  href="https://drive.google.com/file/d/1R5ghSFkTKu-F0wbl62zLd5SciQzw5uyY/view?usp=sharing"
                   target="_blank"
                   className="border-2 border-orange-500 rounded-lg transition-all duration-300 hover:border-white"
                 >
@@ -299,8 +319,8 @@ export default function Portfolio() {
       </section>
 
       {/* Education Section */}
-      <section id="education" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section id="education" className="my-6 px-6 mb-40">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
               Education
@@ -310,7 +330,8 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto ">
+          <div className="space-y-6 lg:flex items-center lg:gap-10">
+            <div className="max-w-3xl mx-auto ">
             <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-orange-500/50 py-5">
               <CardHeader>
                 <CardTitle className="text-2xl group-hover:text-orange-500 transition-colors duration-300">
@@ -338,6 +359,61 @@ export default function Portfolio() {
                 </div>
               </CardContent>
             </Card>
+            </div>
+
+            <div className="max-w-3xl mx-auto ">
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-orange-500/50 py-5">
+              <CardHeader>
+                <CardTitle className="text-2xl group-hover:text-orange-500 transition-colors duration-300">
+                  Intermediate (Science)
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                  <p className="text-muted-foreground font-medium">
+                   Maharishi Vidya Mandir, Aligarh
+                  </p>
+                  <Badge
+                    variant="secondary"
+                    className="bg-orange-500/10 text-orange-500 w-fit"
+                  >
+                    Percentage : 95.4%
+                  </Badge>
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <p>Affiliated to Central Board of Secondary Education (CBSE)</p>
+                  <p className="mt-1">April 2021 - April 2022</p>
+                </div>
+              </CardContent>
+            </Card>
+            </div>
+
+            <div className="max-w-3xl mx-auto ">
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-orange-500/50 py-5">
+              <CardHeader>
+                <CardTitle className="text-2xl group-hover:text-orange-500 transition-colors duration-300">
+                  High School
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                  <p className="text-muted-foreground font-medium">
+                    Maharishi Vidya Mandir, Aligarh
+                  </p>
+                  <Badge
+                    variant="secondary"
+                    className="bg-orange-500/10 text-orange-500 w-fit"
+                  >
+                    Percentage : 91.6%
+                  </Badge>
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <p>Affiliated to Central Board of Secondary Education (CBSE)</p>
+                  <p className="mt-1">April 2019 - April 2020</p>
+                </div>
+              </CardContent>
+            </Card>
+            </div>
           </div>
         </div>
       </section>
@@ -353,12 +429,12 @@ export default function Portfolio() {
               Professional Experience
             </h2>
             <p className="text-xl text-muted-foreground">
-              My journey in software development
+              My journey in Software Development
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-6">
-            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-orange-500/50">
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-orange-500/50 p-4">
               <CardHeader>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                   <div>
@@ -366,7 +442,7 @@ export default function Portfolio() {
                       Software Developer Intern
                     </CardTitle>
                     <CardDescription className="text-lg mt-2">
-                      CoolCliq • Aligarh, India
+                      CoolCliq • Aligarh, India (Remote)
                     </CardDescription>
                   </div>
                   <Badge
@@ -391,12 +467,7 @@ export default function Portfolio() {
                       Collaborated as contributor to the TechTrailDMC project, actively participating in feature development and bug fixes
                     </span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-orange-500 mt-1">•</span>
-                    <span>
-                      Built 25+ UI components for efficient booking, supplier onboarding, and real-time management
-                    </span>
-                  </li>
+                
                   <li className="flex items-start gap-2">
                     <span className="text-orange-500 mt-1">•</span>
                     <span>
@@ -412,6 +483,8 @@ export default function Portfolio() {
                     "MongoDB",
                     "TypeScript",
                     "Tailwind CSS",
+                    "Prisma ORM",
+                    "Supabase",
                   ].map((tech) => (
                     <Badge
                       key={tech}
@@ -425,7 +498,7 @@ export default function Portfolio() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-blue-500/50">
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-blue-500/50 p-4">
               <CardHeader>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                   <div>
@@ -433,7 +506,7 @@ export default function Portfolio() {
                       Software Developer Intern
                     </CardTitle>
                     <CardDescription className="text-lg mt-2">
-                      Temflo Pvt. Ltd. • Aligarh, India
+                      Temflo Pvt. Ltd. • Aligarh, India (Remote)
                     </CardDescription>
                   </div>
                   <Badge
@@ -492,7 +565,7 @@ export default function Portfolio() {
       <section id="projects" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
+           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">Featured Projects</h2>
             <p className="text-xl text-muted-foreground">
               A showcase of my recent work and creative solutions
             </p>
@@ -606,7 +679,7 @@ export default function Portfolio() {
       <section id="skills" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Skills & Expertise</h2>
+           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">Skills & Expertise</h2>
             <p className="text-xl text-muted-foreground">
               Technologies and tools I work with
             </p>
@@ -618,12 +691,12 @@ export default function Portfolio() {
                 icon: <Code className="h-8 w-8" />,
                 title: "Programming Languages",
                 skills: [
-                  "JavaScript (ES6+)",
-                  "TypeScript",
-                  "Java",
-                  "Python",
-                  "C++",
-                  "C",
+                  { name: "JavaScript (ES6+)", level: 90 },
+                  { name: "TypeScript", level: 70 },
+                  { name: "Java", level: 75 },
+                  { name: "Python", level: 65 },
+                  { name: "C++", level: 90 },
+                  { name: "C", level: 80 },
                 ],
                 color: "orange",
               },
@@ -631,12 +704,12 @@ export default function Portfolio() {
                 icon: <Brain className="h-8 w-8" />,
                 title: "Frameworks & Libraries",
                 skills: [
-                  "React.js",
-                  "Next.js",
-                  "Node.js",
-                  "Express.js",
-                  "Redux",
-                  "Tailwind CSS",
+                  { name: "React.js", level: 90 },
+                  { name: "Next.js", level: 85 },
+                  { name: "Node.js", level: 90 },
+                  { name: "Express.js", level: 90 },
+                  { name: "Redux", level: 70 },
+                  { name: "Tailwind CSS", level: 95 },
                 ],
                 color: "blue",
               },
@@ -644,12 +717,12 @@ export default function Portfolio() {
                 icon: <BrainCircuitIcon className="h-8 w-8" />,
                 title: "Database & Cloud",
                 skills: [
-                  "MongoDB",
-                  "PostgreSQL",
-                  "SQL",
-                  "Firebase",
-                  "Supabase",
-                  "WebSockets",
+                  { name: "MongoDB", level: 85 },
+                  { name: "PostgreSQL", level: 75 },
+                  { name: "SQL", level: 75 },
+                  { name: "Firebase", level: 85 },
+                  { name: "Supabase", level: 85 },
+                  { name: "WebSockets", level: 70 },
                 ],
                 color: "green",
               },
@@ -657,12 +730,12 @@ export default function Portfolio() {
                 icon: <Palette className="h-8 w-8" />,
                 title: "Developer Tools",
                 skills: [
-                  "Git",
-                  "Docker",
-                  "Postman",
-                  "Linux",
-                  "Vercel",
-                  "CI/CD Pipelines",
+                  { name: "Git", level: 90 },
+                  { name: "Docker", level: 60 },
+                  { name: "Postman", level: 95 },
+                  { name: "Linux", level: 50 },
+                  { name: "Vercel", level: 85 },
+                  { name: "CI/CD Pipelines", level: 50 },
                 ],
                 color: "yellow",
               },
@@ -670,12 +743,12 @@ export default function Portfolio() {
                 icon: <Brain className="h-8 w-8" />,
                 title: "Data Science",
                 skills: [
-                  "Pandas",
-                  "NumPy",
-                  "Matplotlib",
-                  "Seaborn",
-                  "Data Visualization",
-                  "Data Analysis",
+                  { name: "Pandas", level: 70 },
+                  { name: "NumPy", level: 70 },
+                  { name: "Matplotlib", level: 50 },
+                  { name: "Seaborn", level: 50 },
+                  { name: "Data Visualization", level: 60 },
+                  { name: "Data Analysis", level: 60 },
                 ],
                 color: "purple",
               },
@@ -683,12 +756,12 @@ export default function Portfolio() {
                 icon: <Code className="h-8 w-8" />,
                 title: "Core Concepts",
                 skills: [
-                  "REST APIs",
-                  "OOP",
-                  "DSA",
-                  "System Design",
-                  "DevOps",
-                  "Problem Solving",
+                  { name: "REST APIs", level: 90 },
+                  { name: "OOP", level: 85 },
+                  { name: "DSA", level: 85 },
+                  { name: "System Design", level: 60 },
+                  { name: "DevOps", level: 50 },
+                  { name: "Problem Solving", level: 85 },
                 ],
                 color: "pink",
               },
@@ -751,15 +824,16 @@ export default function Portfolio() {
                   <div className="space-y-2">
                     {category.skills.map((skill, skillIndex) => (
                       <div
-                        key={skill}
+                        key={skill.name}
                         className="flex items-center justify-between p-2 rounded-md hover:bg-muted/50 transition-all duration-300 hover:scale-105"
                         style={{ animationDelay: `${skillIndex * 0.1}s` }}
                       >
-                        <span className="text-sm">{skill}</span>
-                        <div className="w-16 h-2 bg-muted rounded-full overflow-hidden">
+                        <span className="text-sm">{skill.name}</span>
+                        <div className="w-24 h-2 bg-gray-900 rounded-full overflow-hidden">
                           <div
-                            className="h-full rounded-full animate-pulse"
+                            className="h-full rounded-full transition-all duration-1000"
                             style={{
+                              width: `${skill.level}%`,
                               background: `linear-gradient(to right, ${
                                 category.color === "blue"
                                   ? "#3b82f6"
@@ -853,7 +927,7 @@ export default function Portfolio() {
                         variant="secondary"
                         className="bg-yellow-500/10 text-yellow-500"
                       >
-                        August 2025 - Present
+                        August 2025 - Dec 2025
                       </Badge>
                     </div>
                   </CardTitle>
@@ -910,7 +984,7 @@ export default function Portfolio() {
                 <CardContent>
                   <div className="space-y-2">
                     <p className="text-sm text-muted-foreground">
-                      Solved 170+ DSA problems on LeetCode and GeeksForGeeks
+                      Solved 200+ DSA problems on LeetCode and GeeksForGeeks
                     </p>
                   </div>
                 </CardContent>
@@ -928,16 +1002,6 @@ export default function Portfolio() {
             <p className="text-xl text-muted-foreground mb-4">
               Ready to bring your ideas to life? Let's start a conversation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-muted-foreground">
-              <a href="mailto:rupeshvarshney7@gmail.com" className="flex items-center gap-2 hover:text-orange-500 transition-colors">
-                <Mail className="h-4 w-4" />
-                rupeshvarshney7@gmail.com
-              </a>
-              <span className="hidden sm:inline">•</span>
-              <a href="tel:+919456467877" className="flex items-center gap-2 hover:text-orange-500 transition-colors">
-                📱 +91 9456467877
-              </a>
-            </div>
           </div>
 
           <Card className="shadow-2xl border-2 hover:border-orange-500/50 transition-all duration-500">
@@ -1002,9 +1066,17 @@ export default function Portfolio() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full group relative overflow-hidden bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 hover:from-blue-500 hover:via-yellow-500 hover:to-orange-500 transition-all duration-500 transform hover:scale-105"
+                    disabled={isSending}
+                    className="w-full group relative overflow-hidden bg-gradient-to-r from-orange-500 via-yellow-500 to-blue-500 hover:from-blue-500 hover:via-yellow-500 hover:to-orange-500 transition-all duration-500 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    Send Message
+                    {isSending ? (
+                      <div className="flex items-center gap-2">
+                        <div className="h-5 w-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Sending...
+                      </div>
+                    ) : (
+                      "Send Message"
+                    )}
                   </Button>
                   <input type="hidden" name="_captcha" value="false" />
                 </div>
