@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { projects } from "@/data/projects";
 import { db } from "@/lib/firebase";
 import image from "@/public/GP4845.jpg";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -36,6 +37,7 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero");
   const [isLoading, setIsLoading] = useState(true);
   const [isSending, setIsSending] = useState(false);
+  const [visibleProjects, setVisibleProjects] = useState(3);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,6 +83,9 @@ export default function Portfolio() {
   if (isLoading) {
     return <ModernLoader onComplete={() => setIsLoading(false)} />;
   }
+
+  const displayedProjects = projects.slice(0, visibleProjects);
+  const hasMoreProjects = visibleProjects < projects.length;
 
   const handleSendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -244,7 +249,7 @@ export default function Portfolio() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   download
-                  href="https://drive.google.com/file/d/1R5ghSFkTKu-F0wbl62zLd5SciQzw5uyY/view?usp=sharing"
+                  href="https://drive.google.com/file/d/16tF3K0BXCndDlIMA9jfEh6YLS2xybkq3/view?usp=sharing"
                   target="_blank"
                   className="border-2 border-orange-500 rounded-lg transition-all duration-300 hover:border-white"
                 >
@@ -356,7 +361,7 @@ export default function Portfolio() {
                     variant="secondary"
                     className="bg-orange-500/10 text-orange-500 w-fit"
                   >
-                    CGPA: 9.298
+                    CGPA: 9.337
                   </Badge>
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -578,52 +583,7 @@ export default function Portfolio() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Invoice Generator Web-App",
-                description:
-                  "Built an SaaS platform integrating Supabase for seamless data retrieval and middleware access control across 4 pricing tiers, eliminating unauthorized access. Developed GST-compliant invoices with automated tax calculations and PDF generation, reducing errors by 95% and creation time by 60%. Created analytics dashboard with real-time metrics and JWT authentication, optimized for <200ms response time serving 1000+ users.",
-                image:
-                  "https://plus.unsplash.com/premium_photo-1720032304972-1f1142e73253?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                tags: [
-                  "React.js",
-                  "Node.js",
-                  "Express",
-                  "Supabase",
-                  "JWT",
-                  "PDF Generation",
-                ],
-                link: "https://invoice-generator-theta-olive.vercel.app/",
-                github: "https://github.com/rupeshv2121/invoice_generator",
-              },
-              {
-                title: "Portfolio Website",
-                description:
-                  "Developed a personal portfolio website showcasing projects, technical skills, and achievements. Integrated dynamic SEO and server-side rendering (SSR), improving page load speed by 30% and boosting SEO ranking. Implemented responsive and modern UI/UX designs, ensuring seamless experience across different devices (like desktop, tablet, mobile).",
-                image:
-                  "https://assets.awwwards.com/awards/element/2022/05/627be98fa9616400863515.png",
-                tags: [
-                  "Next.js",
-                  "TypeScript",
-                  "Firebase",
-                  "Tailwind CSS",
-                  "SSR",
-                  "SEO",
-                ],
-                link: "https://portfolio-nextjs-blush.vercel.app/",
-                github: "https://github.com/rupeshv2121/Portfolio-Nextjs",
-              },
-              {
-                title: "Data Analysis Project",
-                description:
-                  "Diverse data visualization techniques with charts, plots, and dashboards. Created 5+ charts, plots, and dashboards, improving decision-making efficiency by 30%. Comprehensive analysis using Python data science libraries including Pandas, NumPy, Matplotlib, and Seaborn for insights extraction.",
-                image:
-                  "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RGF0YSUyMEFuYWx5c2lzfGVufDB8fDB8fHww",
-                tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
-                link: "https://github.com/rupeshv2121/Data_Visualization",
-                github: "https://github.com/rupeshv2121/Data_Visualization",
-              },
-            ].map((project, index) => (
+            {displayedProjects.map((project, index) => (
               <Card
                 key={index}
                 className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 hover:rotate-1 overflow-hidden border-2 hover:border-orange-500/50 pb-4"
@@ -678,6 +638,21 @@ export default function Portfolio() {
               </Card>
             ))}
           </div>
+
+          {hasMoreProjects && (
+            <div className="mt-12 flex justify-center">
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() =>
+                  setVisibleProjects((current) => Math.min(current + 3, projects.length))
+                }
+                className="border-2 border-orange-400/80 bg-orange-500/10 text-orange-300 shadow-[0_0_0_1px_rgba(251,146,60,0.25)] hover:bg-orange-500 hover:text-white hover:shadow-[0_0_24px_rgba(251,146,60,0.35)] transition-all duration-300"
+              >
+                See More
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -1132,6 +1107,22 @@ export default function Portfolio() {
           </div>
         </div>
       </footer>
+
+      <Link
+        href="https://wa.me/919456467877"
+        target="_blank"
+        aria-label="Chat on WhatsApp"
+        className="fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/20 bg-[#25D366] text-white shadow-[0_12px_30px_rgba(37,211,102,0.35)] transition-all duration-300 hover:scale-110 hover:shadow-[0_16px_40px_rgba(37,211,102,0.45)]"
+      >
+        <svg
+          viewBox="0 0 32 32"
+          className="h-8 w-8"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M19.11 17.44c-.27-.14-1.59-.79-1.84-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.2-1.33-.82-.73-1.37-1.63-1.53-1.9-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.04-.34-.02-.48-.07-.14-.61-1.48-.84-2.02-.22-.54-.45-.47-.61-.48l-.52-.01c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26s.98 2.63 1.12 2.81c.14.18 1.91 2.92 4.62 4.1.65.28 1.15.45 1.54.58.65.21 1.25.18 1.72.11.52-.08 1.59-.65 1.81-1.27.22-.61.22-1.14.16-1.27-.07-.14-.25-.2-.52-.34Zm-3.09 8.29h-.01c-1.95 0-3.86-.52-5.53-1.52l-.4-.24-4.11 1.08 1.1-4.01-.26-.41a10.27 10.27 0 0 1-1.57-5.44C5.24 9.18 9.78 4.64 15.38 4.64c2.72 0 5.28 1.06 7.22 3s3 4.49 3 7.22c0 5.6-4.54 10.17-10.18 10.17Zm8.67-18.84A12.2 12.2 0 0 0 15.38 2.9C8.43 2.9 2.79 8.54 2.79 15.49c0 2.21.58 4.37 1.69 6.28L2.7 29.1l7.52-1.76a12.58 12.58 0 0 0 5.16 1.11h.01c6.94 0 12.58-5.64 12.58-12.59a12.2 12.2 0 0 0-3.28-8.47Z" />
+        </svg>
+      </Link>
     </div>
   );
 }
