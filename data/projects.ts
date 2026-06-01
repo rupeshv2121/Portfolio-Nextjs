@@ -186,8 +186,7 @@ export const projects = [
     title: "Data Analysis Project",
     description:
       "Diverse data visualization techniques with charts, plots, and dashboards. Created 5+ charts, plots, and dashboards, improving decision-making efficiency by 30%. Comprehensive analysis using Python data science libraries including Pandas, NumPy, Matplotlib, and Seaborn for insights extraction.",
-    image:
-      "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RGF0YSUyMEFuYWx5c2lzfGVufDB8fDB8fHww",
+    image: "/DataAnalysisProject.png",
     tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
     link: "https://github.com/rupeshv2121/Data_Visualization",
     github: "https://github.com/rupeshv2121/Data_Visualization",
