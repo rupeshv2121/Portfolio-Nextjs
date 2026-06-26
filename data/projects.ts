@@ -90,7 +90,7 @@ export const projects = [
       "Supabase",
       "Zod",
     ],
-    link: "https://system-drift-frontend.vercel.app/",
+    link: "https://system-collapse-frontend.onrender.com/",
     github: "https://github.com/rupeshv2121/system_collapse_frontend",
   },
   // SmartFlow AI - Intelligent Traffic & Emergency Grid
@@ -158,7 +158,7 @@ export const projects = [
       "Swagger UI",
       "Google Calendar API",
     ],
-    link: "",
+    link: "https://bmw-alpine-dream-frontend.onrender.com",
     github: "https://github.com/rupeshv2121/Amulate-BMW-Group",
   },
   // Portfolio Website
