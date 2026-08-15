@@ -10,7 +10,7 @@ export const profile = {
   role: "Full Stack Developer",
   tagline:
     "Code with character, design with soul. Bringing ideas to life—one stack at a time.",
-  status: "open to SDE / frontend roles",
+  status: "open to SDE / AI roles",
   location: "Aligarh, India",
   email: "rupeshvarshney7@gmail.com",
   phone: "+91 9456467877",
