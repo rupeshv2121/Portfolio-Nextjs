@@ -1,4 +1,40 @@
-export const projects = [
+export type Project = {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  link: string;
+  github: string;
+  /** Agent-based / AI systems get a distinct treatment in the projects grid. */
+  agentic?: boolean;
+};
+
+export const projects: Project[] = [
+  // AMULate BMW Group - AI-powered Calendar & Task Management (multi-agent)
+  {
+    title: "AI-Powered Calendar & Task Assistant — AMULate, BMW Group",
+    description:
+      "A multi-agent productivity platform built with LangChain and LangGraph for intelligent scheduling. Specialised agent workflows handle task prioritisation, calendar scheduling, and automated reminder generation, with a voice-enabled interaction module for hands-free use and Google Calendar API integration. Placed Rank 3 at the AMULATE Hackathon (BMW Group).",
+    image: "/AMULateBMWGrou.png",
+    tags: [
+      "LangGraph",
+      "LangChain",
+      "Langfuse",
+      "Groq",
+      "FastAPI",
+      "Pydantic",
+      "React.js",
+      "typescript",
+      "shadCN UI",
+      "framer-motion",
+      "Spline",
+      "React Three Fiber",
+      "Google Calendar API",
+    ],
+    link: "https://bmw-alpine-dream-frontend.onrender.com",
+    github: "https://github.com/rupeshv2121/Amulate-BMW-Group",
+    agentic: true,
+  },
   // CampusCure - The Smart Way to Manage Campus Life
   {
     title: "CampusCure - The Smart Way to Manage Campus Life",
@@ -25,6 +61,23 @@ export const projects = [
     ],
     link: "https://campus-cure-frontend.vercel.app/",
     github: "https://github.com/rupeshv2121/CampusCure_Frontend",
+  },
+  // Invoice Generator Web-App
+  {
+    title: "Invoice Generator Web-App",
+    description:
+      "A SaaS invoicing platform with subscription management, automated trials, and role-based middleware access control across 4 pricing tiers. GST-compliant invoicing with automated CGST/SGST/IGST calculations and PDF generation reduced errors by 95% and creation time by 60%. Analytics dashboard with real-time metrics and JWT auth, optimised for <200ms response time.",
+    image: "/InvoiceGenerator.png",
+    tags: [
+      "React.js",
+      "Node.js",
+      "Express",
+      "Supabase",
+      "JWT",
+      "PDF Generation",
+    ],
+    link: "https://invoice-generator-theta-olive.vercel.app/",
+    github: "https://github.com/rupeshv2121/invoice_generator",
   },
   // Out from Cumfurt
   {
@@ -73,6 +126,7 @@ export const projects = [
     ],
     link: "https://calm-path-frontend.vercel.app/",
     github: "",
+    agentic: true,
   },
   // System Drift
   {
@@ -117,49 +171,7 @@ export const projects = [
     link: "https://smart-flow-ai-intelligent-traffic-e.vercel.app/",
     github:
       "https://github.com/rupeshv2121/SmartFlow_AI-Intelligent_Traffic_Emergency_Grid-India_Innovate_Hackathon",
-  },
-  // Invoice Generator Web-App
-  {
-    title: "Invoice Generator Web-App",
-    description:
-      "Built an SaaS platform integrating Supabase for seamless data retrieval and middleware access control across 4 pricing tiers, eliminating unauthorized access. Developed GST-compliant invoices with automated tax calculations and PDF generation, reducing errors by 95% and creation time by 60%. Created analytics dashboard with real-time metrics and JWT authentication, optimized for <200ms response time serving 1000+ users.",
-    image: "/InvoiceGenerator.png",
-    tags: [
-      "React.js",
-      "Node.js",
-      "Express",
-      "Supabase",
-      "JWT",
-      "PDF Generation",
-    ],
-    link: "https://invoice-generator-theta-olive.vercel.app/",
-    github: "https://github.com/rupeshv2121/invoice_generator",
-  },
-
-  // AMULate BMW Group - An intelligent AI-powered productivity assistant
-  {
-    title:
-      "AMULate BMW Group - An intelligent AI-powered productivity assistant",
-    description:
-      "An intelligent AI-powered productivity assistant with BMW-themed showcase, featuring calendar management, task tracking, and AI chat capabilities. Integrated with Google Calendar API for seamless scheduling and task management. The assistant provides personalized productivity insights and recommendations, enhancing user efficiency and organization.",
-    image: "/AMULateBMWGrou.png",
-    tags: [
-      "React.js",
-      "Spline",
-      "React Three Fiber",
-      "typescript",
-      "shadCN UI",
-      "framer-motion",
-      "FastAPI",
-      "LangGraph",
-      "Langfuse",
-      "Groq",
-      "Pydantic",
-      "Swagger UI",
-      "Google Calendar API",
-    ],
-    link: "https://bmw-alpine-dream-frontend.onrender.com",
-    github: "https://github.com/rupeshv2121/Amulate-BMW-Group",
+    agentic: true,
   },
   // Portfolio Website
   {

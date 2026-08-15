@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+
+type Particle = {
+  left: string;
+  top: string;
+  backgroundColor: string;
+  animationDelay: string;
+  animationDuration: string;
+};
 
 export default function ModernLoader({
   onComplete,
@@ -9,6 +17,22 @@ export default function ModernLoader({
 }) {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  // Generated after mount: randomising during render makes the server and
+  // client markup disagree, which React reports as a hydration mismatch.
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  useEffect(() => {
+    const colors = ["#f97316", "#eab308", "#3b82f6"];
+    setParticles(
+      Array.from({ length: 20 }, () => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+        animationDelay: `${Math.random() * 3}s`,
+        animationDuration: `${3 + Math.random() * 2}s`,
+      }))
+    );
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -68,30 +92,13 @@ export default function ModernLoader({
 
         {/* Floating Particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {useMemo(() => {
-            const colors = ["#f97316", "#eab308", "#3b82f6"];
-            return [...Array(20)].map((_, i) => {
-              const left = `${Math.random() * 100}%`;
-              const top = `${Math.random() * 100}%`;
-              const backgroundColor =
-                colors[Math.floor(Math.random() * colors.length)];
-              const animationDelay = `${Math.random() * 3}s`;
-              const animationDuration = `${3 + Math.random() * 2}s`;
-              return (
-                <div
-                  key={i}
-                  className="absolute w-2 h-2 rounded-full animate-float-particle"
-                  style={{
-                    left,
-                    top,
-                    backgroundColor,
-                    animationDelay,
-                    animationDuration,
-                  }}
-                ></div>
-              );
-            });
-          }, [])}
+          {particles.map((particle, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 rounded-full animate-float-particle"
+              style={particle}
+            ></div>
+          ))}
         </div>
       </div>
     </div>
